@@ -1,0 +1,71 @@
+PsudeoCode:
+
+Initialize an array of size 100
+Create a list to store booked seats
+
+Prompt user for the number of seats to be booked
+Read the number of seats
+
+For each seat to be booked:
+    Prompt user for the seat number
+    Read the seat number
+    Try to:
+        Check if seat number is within valid range (1 to 100)
+        If valid, add seat number to the booked seats list
+        If invalid, throw ArrayIndexOutOfBoundsException
+    Catch ArrayIndexOutOfBoundsException:
+        Print exception message with the invalid index
+
+Print all booked seats
+
+
+
+
+
+
+Code:
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        // Initialize an array of size 100
+        int[] seats = new int[100];
+
+        // Create a list to store booked seats
+        List<Integer> bookedSeats = new ArrayList<>();
+
+        // Prompt user for the number of seats to be booked
+        System.out.println("Enter the number of seats to be booked:");
+        Scanner scanner = new Scanner(System.in);
+        int numberOfSeats = scanner.nextInt();
+
+        // Loop through each seat to be booked
+        for (int i = 0; i < numberOfSeats; i++) {
+            System.out.println("Enter the seat number " + (i + 1) + ":");
+            int seatNumber = scanner.nextInt();
+
+            // Try to book the seat
+            try {
+                // Check if seat number is within valid range (1 to 100)
+                if (seatNumber < 1 || seatNumber > 100) {
+                    throw new ArrayIndexOutOfBoundsException(seatNumber - 1);
+                }
+
+                // If valid, add seat number to the booked seats list
+                bookedSeats.add(seatNumber);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                // Print exception message with the invalid index
+                System.out.println("java.lang.ArrayIndexOutOfBoundsException: " + (seatNumber - 1));
+            }
+        }
+
+        // Print all booked seats
+        System.out.println("The seats booked are:");
+        for (int seat : bookedSeats) {
+            System.out.println(seat);
+        }
+    }
+}
